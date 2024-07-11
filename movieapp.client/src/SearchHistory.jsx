@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
-import { getSearchHistory } from './utils/cookieUtils';
+import { getSearchHistoryCookie } from './utils/cookieUtils';
 
-const SearchHistory = ({ SearchHistory, setRecentSearches }) => {
+const SearchHistory = ({ searchHistory, setSearchHistory }) => {
     useEffect(() => {
         // Load recent searches from cookies
-        const savedRecentSearches = getSearchHistory();
-        if (savedRecentSearches) {
-            setRecentSearches(JSON.parse(savedRecentSearches));
+        const cookieSearchHistory = getSearchHistoryCookie();
+        if (cookieSearchHistory) {
+            setSearchHistory(JSON.parse(cookieSearchHistory));
         }
     }, []);
 
     return (
         <>
-            {SearchHistory.length > 0 && (
+            {searchHistory.length > 0 && (
                 <div className="recent-searches">
                     <h3>Recent Searches</h3>
                     <ul>
-                        {SearchHistory.map((query, index) => (
+                        {searchHistory.map((query, index) => (
                             <li key={index}>
                                 {query}
                             </li>

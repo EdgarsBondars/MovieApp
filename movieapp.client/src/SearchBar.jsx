@@ -1,21 +1,23 @@
 import React from 'react';
 import { fetchMovies } from './utils/api';
-import { setSearchHistory } from './utils/cookieUtils';
+import { setSearchHistoryCookie } from './utils/cookieUtils';
 
-const SearchBar = ({ searchQuery, setSearchQuery, setRecentSearches, setSearchResults }) => {
+const SearchBar = ({ searchQuery, setSearchQuery, setSearchHistory, setSearchResults }) => {
   const handleSearch = (event) => {
     event.preventDefault();
-    searchMovies();
+    if (searchQuery){
+      searchMovies();
+    }
   };
 
   const searchMovies = async () => {
-    setRecentSearches((prevRecentSearches) => {
+    setSearchHistory((prevRecentSearches) => {
       const updatedSearchHistory = [searchQuery, ...prevRecentSearches.filter(q => q !== searchQuery)].slice(0, 5);
-      setSearchHistory(updatedSearchHistory);
+      setSearchHistoryCookie(updatedSearchHistory);
       return updatedSearchHistory;
     });
-    
-      setSearchResults(await fetchMovies(searchQuery) || []);
+
+    setSearchResults(await fetchMovies(searchQuery) || []);
   };
 
   return (

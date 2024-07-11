@@ -14,12 +14,12 @@ const MovieApp = () => {
       <SearchBar
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
-        setRecentSearches={setSearchHistory}
+        setSearchHistory={setSearchHistory}
         setSearchResults={setSearchResults}
       />
-      <SearchHistory 
-        SearchHistory={searchHistory}
-        setRecentSearches={setSearchHistory} />
+      <SearchHistory
+        searchHistory={searchHistory}
+        setSearchHistory={setSearchHistory} />
       <MovieSearchResults searchResults={searchResults} />
     </div>
   );
